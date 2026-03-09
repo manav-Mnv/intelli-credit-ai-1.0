@@ -1,0 +1,89 @@
+version: "3.9"
+
+services:
+  # ── Backend API ─────────────────────────────────────────────────────────
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_KEY=${SUPABASE_KEY}
+      - REDIS_URL=redis://redis:6379/0
+      - NEO4J_URI=bolt://neo4j:7687
+      - NEO4J_USER=neo4j
+      - NEO4J_PASSWORD=password
+      - UPLOAD_DIR=/app/uploads
+    volumes:
+      - ./backend/uploads:/app/uploads
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  # ── Celery Worker ────────────────────────────────────────────────────────
+  celery_worker:
+    build: ./backend
+    command: celery -A app.tasks.celery_app worker --loglevel=info --concurrency=2
+    environment:
+      - SUPABASE_URL=${SUPABASE_URL}
+      - SUPABASE_KEY=${SUPABASE_KEY}
+      - REDIS_URL=redis://redis:6379/0
+      - NEO4J_URI=bolt://neo4j:7687
+      - NEO4J_USER=neo4j
+      - NEO4J_PASSWORD=password
+      - UPLOAD_DIR=/app/uploads
+    volumes:
+      - ./backend/uploads:/app/uploads
+    depends_on:
+      - redis
+      - backend
+    restart: unless-stopped
+
+  # ── Frontend ─────────────────────────────────────────────────────────────
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  # ── Redis ─────────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+  # ── Neo4j ─────────────────────────────────────────────────────────────────
+  neo4j:
+    image: neo4j:5-community
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=neo4j/password
+      - NEO4J_PLUGINS=["apoc"]
+    volumes:
+      - neo4j_data:/data
+    restart: unless-stopped
+
+  # ── Celery Flower (Task Monitor UI) ─────────────────────────────────────
+  flower:
+    build: ./backend
+    command: celery -A app.tasks.celery_app flower --port=5555
+    ports:
+      - "5555:5555"
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+      - celery_worker
+    restart: unless-stopped
+
+volumes:
+  neo4j_data:
+  chromadb_data:
+

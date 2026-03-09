@@ -1,0 +1,48 @@
+# Core
+fastapi
+uvicorn[standard]
+python-multipart
+python-dotenv
+httpx
+
+# Database
+supabase
+
+# Document processing (NO PyMuPDF — needs Visual Studio on Windows)
+pdfplumber
+openpyxl
+python-docx
+
+# ML / AI
+xgboost
+scikit-learn
+numpy
+pandas
+
+# NLP  (torch + transformers are HUGE ~2GB download — optional)
+# Uncomment below if you want FinBERT NLP risk:
+# transformers
+# torch
+
+# LangChain (optional — only if using advanced agent chains)
+# langchain
+# langchain-community
+
+# Vector DB
+chromadb
+sentence-transformers
+
+# Task queue
+celery
+redis
+
+# Web search
+duckduckgo-search
+
+# Neo4j
+neo4j
+
+# Utilities
+aiofiles
+Pillow
+reportlab

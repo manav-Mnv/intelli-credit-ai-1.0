@@ -1,0 +1,259 @@
+# IntelliCredit AI — Complete Setup Guide
+
+> Everything YOU need to do, step by step, to get the full system running.
+
+---
+
+## What's Built vs What YOU Need To Do
+
+| Layer | Built by me (code done ✅) | YOU need to do 🔧 |
+|-------|---------------------------|-------------------|
+| **Backend (FastAPI)** | All 7 API routers, 5 services, 4 agents | Install Python packages, start server |
+| **Frontend (Next.js)** | 5 pages, Navbar, API client | Already installed (`npm install` done) |
+| **Supabase (Database)** | Schema SQL file written | Create free project + run SQL |
+| **Redis (Task Queue)** | Celery configured | Start Redis container |
+| **Neo4j (Graph DB)** | Graph agent code done | Start Neo4j container (optional) |
+| **ChromaDB (Vectors)** | Vector store code done | Installs automatically with pip |
+| **Ollama (Local LLM)** | LLM service code done | Install Ollama + pull model (optional) |
+| **ML Model (XGBoost)** | Training script done | Run training script once |
+| **Docker** | Compose + Dockerfiles done | Run `docker compose up` |
+
+---
+
+## Step-by-Step Setup
+
+### Step 1: Install Backend Python Packages
+
+```powershell
+cd m:\intelli-credit-ai-1\backend
+pip install -r requirements.txt
+```
+
+> [!WARNING]
+> This installs ~30 packages including FastAPI, XGBoost, PyMuPDF, etc.
+> If any fail (like PyTorch), that's OK — the system works without them.
+> The critical ones are: `fastapi`, `uvicorn`, `python-dotenv`, [supabase](file:///m:/intelli-credit-ai-1/backend/app/database.py#10-23), [openpyxl](file:///m:/intelli-credit-ai-1/backend/app/services/document_processor.py#39-46)
+
+---
+
+### Step 2: Set Up Supabase (FREE Database)
+
+This is the **most important step** — without it, data won't persist.
+
+1. Go to **[supabase.com](https://supabase.com)** → Sign up (free)
+2. Click **"New Project"** → Name it `intellicredit` → Set a DB password → Create
+3. Wait ~2 min for it to provision
+4. Go to **SQL Editor** (left sidebar) → Click **"New Query"**
+5. Open this file and copy ALL its contents:
+
+   ```
+   m:\intelli-credit-ai-1\backend\supabase_schema.sql
+   ```
+
+6. Paste into SQL Editor → Click **"Run"** → Should say "Success"
+7. Go to **Settings → API** (left sidebar under gear icon)
+8. Copy these 2 values:
+   - **Project URL** (looks like `https://abcxyz.supabase.co`)
+   - **anon public key** (long string starting with `eyJ...`)
+
+9. Edit the backend [.env](file:///m:/intelli-credit-ai-1/backend/.env) file:
+
+   ```powershell
+   notepad m:\intelli-credit-ai-1\backend\.env
+   ```
+
+   Replace the placeholder values:
+   ```
+   SUPABASE_URL=https://YOUR-PROJECT-ID.supabase.co
+   SUPABASE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.YOUR_KEY_HERE
+   ```
+
+   Save and close.
+
+> [!IMPORTANT]
+> Without this step, the backend runs in "demo mode" — analysis works but nothing saves to DB.
+
+---
+
+### Step 3: Start Redis (Required for Celery task queue)
+
+```powershell
+docker run -d -p 6379:6379 --name intellicredit_redis redis:7-alpine
+```
+
+> [!NOTE]
+> If you get "name already in use", run: `docker start intellicredit_redis`
+
+---
+
+### Step 4: Start Neo4j (OPTIONAL — for director graph risk)
+
+```powershell
+docker run -d -p 7474:7474 -p 7687:7687 --name intellicredit_neo4j -e NEO4J_AUTH=neo4j/password neo4j:5-community
+```
+
+- Web UI: **http://localhost:7474** (login: neo4j / password)
+- Skip this if you don't need director cross-default risk detection
+
+---
+
+### Step 5: Train the ML Model (One time)
+
+```powershell
+cd m:\intelli-credit-ai-1
+pip install xgboost scikit-learn
+python ml\train_model.py
+```
+
+Expected output:
+```
+✅ Model trained successfully!
+   AUC-ROC: 0.99xx
+💾 Model saved to models/credit_risk_xgb.pkl
+```
+
+> [!NOTE]
+> If you skip this, the system uses a heuristic fallback formula instead of XGBoost. It still works, just less accurate.
+
+---
+
+### Step 6: Install Ollama (OPTIONAL — for AI-enhanced CAM reports)
+
+1. Download from **[ollama.com](https://ollama.com)** → Install
+2. Pull a model:
+   ```powershell
+   ollama pull llama3
+   ```
+3. Ollama runs automatically in background on port 11434
+
+> [!NOTE]
+> If you skip this, CAM reports use template text instead of AI-generated paragraphs. Still fully functional.
+
+---
+
+### Step 7: Start the Backend
+
+```powershell
+cd m:\intelli-credit-ai-1\backend
+uvicorn app.main:app --reload --port 8000
+```
+
+Open **http://localhost:8000/docs** → You should see Swagger UI with all 7 API groups.
+
+---
+
+### Step 8: Start the Frontend
+
+Open a **new terminal**:
+
+```powershell
+cd m:\intelli-credit-ai-1\frontend
+npm run dev
+```
+
+Open **http://localhost:3000** → You should see the IntelliCredit AI home page.
+
+---
+
+### Step 9: Load Demo Data (OPTIONAL — skip if uploading real documents)
+
+Open a **new terminal**:
+
+```powershell
+cd m:\intelli-credit-ai-1\backend
+python ..\demo_data.py
+```
+
+This creates 3 companies with pre-computed analysis. View them at **http://localhost:3000/dashboard**.
+
+---
+
+### Step 10: Test the Full Pipeline
+
+1. Open **http://localhost:3000/upload**
+2. Enter: Company Name = `Test Company`, Industry = `Manufacturing`
+3. Upload the sample file: `m:\intelli-credit-ai-1\sample_data\ABC_Steel_Annual_Report_2024.txt`
+4. Watch the 4-step progress bar
+5. View the Analysis page (charts, risk score)
+6. View the CAM Report (6-section memo)
+
+---
+
+## Testing with Postman
+
+Base URL: `http://localhost:8000`
+
+| # | Method | URL | Body/Params |
+|---|--------|-----|-------------|
+| 1 | `POST` | `/api/documents/upload` | Form-data: [file](file:///m:/intelli-credit-ai-1/backend/Dockerfile) = PDF/TXT, `company_name` = "Test Co", [industry](file:///m:/intelli-credit-ai-1/backend/app/services/llm_service.py#103-113) = "Steel" |
+| 2 | `GET` | `/api/companies/` | — |
+| 3 | `POST` | `/api/risk/analyze` | JSON: `{"company_id": "ID_FROM_STEP_1", "industry": "Steel"}` |
+| 4 | `POST` | `/api/research/run` | JSON: `{"company_id": "ID", "company_name": "Test Co", "industry": "Steel"}` |
+| 5 | `POST` | `/api/cam/generate` | JSON: `{"company_id": "ID", "requested_loan_amount": 100000000}` |
+| 6 | `GET` | `/api/cam/full/{company_id}` | — (returns everything) |
+| 7 | `POST` | `/api/graph/risk-check` | JSON: `{"company_name": "Test Co"}` |
+| 8 | `GET` | `/api/graph/status` | — (checks Neo4j connection) |
+| 9 | `GET` | `/health` | — (backend health check) |
+
+> [!TIP]
+> Open **http://localhost:8000/docs** — FastAPI auto-generates an interactive API tester. You can test every endpoint without Postman!
+
+---
+
+## Docker Compose (Alternative — runs EVERYTHING in one command)
+
+Instead of Steps 3-8, you can run everything via Docker:
+
+```powershell
+cd m:\intelli-credit-ai-1
+
+# First, make sure .env is configured (Step 2 above)
+docker compose up --build
+```
+
+This starts: Backend (:8000), Frontend (:3000), Redis (:6379), Neo4j (:7474/:7687), Celery Worker, Flower (:5555)
+
+> [!CAUTION]
+> Docker build takes 5-10 min the first time (downloads Python packages + Node modules).
+> If Neo4j image pull fails due to network, comment it out in [docker-compose.yml](file:///m:/intelli-credit-ai-1/docker-compose.yml) — it's optional.
+
+---
+
+## What Each Service Connects To (Architecture)
+
+```
+┌─────────────┐     ┌─────────────────────────────────────┐
+│  Frontend   │────▶│  Backend (FastAPI :8000)             │
+│  Next.js    │     │                                     │
+│  :3000      │     │  ├─ Document Processor               │
+│             │     │  │   └─▶ ChromaDB (in-process)       │
+│  Upload ───────▶  │  ├─ Financial Analyzer               │
+│  Analysis ◀────── │  ├─ Risk Engine ──▶ XGBoost Model    │
+│  CAM Report◀───── │  ├─ Decision Engine                  │
+│  Dashboard ◀───── │  ├─ CAM Generator ──▶ Ollama (:11434)│
+└─────────────┘     │  │                                   │
+                    │  ├─ News Agent ──▶ DuckDuckGo (free) │
+                    │  ├─ Litigation Agent ──▶ DuckDuckGo  │
+                    │  ├─ Industry Agent ──▶ DuckDuckGo    │
+                    │  └─ Graph Agent ──▶ Neo4j (:7687)    │
+                    │                                     │
+                    │  ──▶ Supabase Cloud (PostgreSQL)     │
+                    │  ──▶ Redis (:6379) for Celery        │
+                    └─────────────────────────────────────┘
+```
+
+---
+
+## Summary: What's Required vs Optional
+
+| Component | Required? | What happens without it |
+|-----------|-----------|------------------------|
+| **Supabase** | ⚡ REQUIRED for persistence | Demo mode — analysis works but data lost on restart |
+| **Redis** | ⚡ REQUIRED for Celery | Background tasks won't run (sync fallback works) |
+| **pip install** | ⚡ REQUIRED | Backend won't start |
+| **npm install** | ✅ Already done | — |
+| **Neo4j** | Optional | Graph risk returns demo data |
+| **Ollama** | Optional | CAM uses template text instead of AI narrative |
+| **ML model training** | Optional | Uses heuristic formula instead of XGBoost |
+| **PyMuPDF/pdfplumber** | Optional | PDF parsing unavailable, but TXT/Excel work |
+| **Docker** | Optional | Can run everything manually instead |

@@ -1,0 +1,47 @@
+# IntelliCredit AI — .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+venv/
+.venv/
+env/
+
+# FastAPI / uploads
+backend/uploads/
+backend/chromadb_data/
+
+# ML models (large files)
+ml/models/*.pkl
+ml/models/*.json
+
+# Environment
+.env
+.env.local
+backend/.env
+
+# Node.js
+node_modules/
+.next/
+out/
+frontend/.next/
+frontend/out/
+frontend/node_modules/
+
+# Logs
+*.log
+celerybeat-schedule
+
+# Docker
+*.override.yml
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntelliCredit AI</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background Elements -->
+    <div class="bg-gradient-radial"></div>
+
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="logo">
+            <span class="text-primary">Intelli</span>Credit AI
+        </div>
+        <nav class="nav-links">
+            <a href="#problem">Problem</a>
+            <a href="#solution">Solution</a>
+            <a href="architecture.html">Structure & Architecture</a>
+            <a href="#demo" class="btn btn-outline-primary btn-sm">Try Demo</a>
+            <a href="http://localhost:8000/docs" target="_blank" class="btn btn-outline-primary btn-sm">API Docs</a>
+        </nav>
+    </header>
+
+    <!-- 1. Hero Section -->
+    <section class="section hero" id="hero">
+        <div class="container text-center hero-content">
+            <div class="badge animate-fade-in mb-2">✨ IntelliCredit AI Showcase</div>
+            <h1 class="animate-fade-in mb-1">
+                <span class="text-gradient">AI‑Powered Corporate</span><br />
+                <span class="text-gradient-primary">Credit Intelligence Platform</span>
+            </h1>
+            <p class="animate-fade-in text-secondary subtitle delay-1">
+                IntelliCredit AI automates corporate loan analysis by extracting financial data, detecting hidden risks,
+                and generating explainable credit decisions within minutes.
+            </p>
+            <div class="btn-group animate-fade-in delay-2">
+                <a href="architecture.html" class="btn btn-primary"><i class="fas fa-sitemap"></i> View Architecture</a>
+                <a href="#demo" class="btn btn-secondary"><i class="fas fa-play"></i> Try Demo</a>
+                <a href="#api" class="btn btn-secondary"><i class="fas fa-book-open"></i> View Documentation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Problem Section -->
+    <section class="section container" id="problem">
+        <div class="section-header text-center">
+            <h2>The <span class="text-danger">Problem</span> with Corporate Loan Analysis</h2>
+            <p class="text-secondary subtitle">
+                Banks currently analyze loans manually. Analysts read 100+ page financial reports, risk signals are
+                hidden in unstructured documents, and the approval process takes days or weeks.
+            </p>
+        </div>
+
+        <div class="grid grid-2">
+            <div class="glass-card problem-card">
+                <div class="icon-box danger-bg"><i class="fas fa-clock"></i></div>
+                <h3>Slow Approvals</h3>
+                <p class="text-secondary">Approval process takes days or weeks manually analyzing lengthy, complex
+                    reports.</p>
+            </div>
+            <div class="glass-card problem-card">
+                <div class="icon-box danger-bg"><i class="fas fa-eye-slash"></i></div>
+                <h3>Human Bias</h3>
+                <p class="text-secondary">Subjective analysis leading to inconsistent and risky lending decisions.</p>
+            </div>
+            <div class="glass-card problem-card">
+                <div class="icon-box danger-bg"><i class="fas fa-search-minus"></i></div>
+                <h3>Missed Risk Signals</h3>
+                <p class="text-secondary">Critical risk signals hidden deep in unstructured documents are often
+                    overlooked.</p>
+            </div>
+            <div class="glass-card problem-card">
+                <div class="icon-box danger-bg"><i class="fas fa-arrow-trend-down"></i></div>
+                <h3>High Operational Cost</h3>
+                <p class="text-secondary">Excessive manual effort required per loan application, driving up processing
+                    costs.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Solution Section -->
+    <section class="section bg-secondary" id="solution">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>The <span class="text-gradient-primary">IntelliCredit AI</span> Solution</h2>
+                <p class="text-secondary subtitle">
+                    Automated, data-driven credit risk analysis. Loan decisions in minutes, not weeks.
+                </p>
+            </div>
+
+            <div class="flow-diagram">
+                <div class="glass-card flow-step">
+                    <div class="icon-box primary-glow-bg"><i class="fas fa-upload"></i></div>
+                    <div>
+                        <h3>1. Upload Documents</h3>
+                        <p class="text-secondary">System ingests PDFs, bank statements, and legal notices.</p>
+                    </div>
+                </div>
+
+                <div class="flow-line"></div>
+
+                <div class="glass-card flow-step">
+                    <div class="icon-box primary-glow-bg"><i class="fas fa-microchip"></i></div>
+                    <div>
+                        <h3>2. AI Extracts Financial Data</h3>
+                        <p class="text-secondary">OCR and NLP parse tables and retrieve unstructured risk signals.</p>
+                    </div>
+                </div>
+
+                <div class="flow-line"></div>
+
+                <div class="glass-card flow-step">
+                    <div class="icon-box primary-glow-bg"><i class="fas fa-chart-line"></i></div>
+                    <div>
+                        <h3>3. Risk Models Analyze Company</h3>
+                        <p class="text-secondary">4-layer engine: Rule-based ratios, XGBoost ML, NLP keyword signals, and sector risk weighting.</p>
+                    </div>
+                </div>
+
+                <div class="flow-line"></div>
+
+                <div class="glass-card flow-step">
+                    <div class="icon-box primary-glow-bg"><i class="fas fa-search"></i></div>
+                    <div>
+                        <h3>4. Research Agents Gather Intelligence</h3>
+                        <p class="text-secondary">AI automatically fetches external news, litigation history, and
+                            industry trends.</p>
+                    </div>
+                </div>
+
+                <div class="flow-line"></div>
+
+                <div class="glass-card flow-step border-accent">
+                    <div class="icon-box accent-bg"><i class="fas fa-bolt"></i></div>
+                    <div>
+                        <h3>5. AI Generates Credit Appraisal Memo</h3>
+                        <p class="text-accent bold">⚡ Loan decisions in minutes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. System Architecture -->
+    <section class="section container" id="architecture">
+        <div class="section-header text-center">
+            <h2>System <span class="text-gradient">Architecture</span></h2>
+            <p class="text-secondary subtitle">
+                A robust, scalable, and intelligent pipeline designed for high-performance financial analysis.
+            </p>
+        </div>
+
+        <div class="architecture-diagram glass-card">
+            <!-- Frontend -->
+            <div class="glass-card text-center arch-box">
+                <i class="fas fa-layer-group text-primary mb-05 icon-large"></i>
+                <h3>Frontend (Next.js Dashboard)</h3>
+            </div>
+
+            <i class="fas fa-arrow-down text-muted arch-arrow"></i>
+
+            <!-- Mid layer -->
+            <div class="grid grid-3 w-100">
+                <div class="glass-card text-center arch-box bg-primary-faint">
+                    <i class="fas fa-server text-primary mb-05 icon-large"></i>
+                    <h4>FastAPI Backend</h4>
+                </div>
+                <div class="glass-card text-center arch-box bg-danger-faint">
+                    <i class="fas fa-database text-danger mb-05 icon-large"></i>
+                    <h4>Redis Queue</h4>
+                </div>
+                <div class="glass-card text-center arch-box bg-accent-faint">
+                    <i class="fas fa-cogs text-accent mb-05 icon-large"></i>
+                    <h4>Celery Workers</h4>
+                </div>
+            </div>
+
+            <i class="fas fa-arrow-down text-muted arch-arrow"></i>
+
+            <!-- Engines -->
+            <div class="grid grid-3 w-100">
+                <div class="glass-card text-center arch-box">
+                    <i class="fas fa-file-alt icon-purple mb-05 icon-large"></i>
+                    <h4>Document Engine</h4>
+                </div>
+                <div class="glass-card text-center arch-box">
+                    <i class="fas fa-brain icon-orange mb-05 icon-large"></i>
+                    <h4>Financial Engine</h4>
+                </div>
+                <div class="glass-card text-center arch-box">
+                    <i class="fas fa-robot icon-cyan mb-05 icon-large"></i>
+                    <h4>AI Agents</h4>
+                </div>
+            </div>
+
+            <i class="fas fa-arrow-down text-muted arch-arrow"></i>
+
+            <!-- ML Models -->
+            <div class="grid grid-2 w-100">
+                <div class="glass-card text-center arch-box border-orange border-glow">
+                    <h4>XGBoost Risk Model</h4>
+                    <p class="text-muted text-small mt-05">Default probability · SHAP</p>
+                </div>
+                <div class="glass-card text-center arch-box border-purple border-glow">
+                    <h4>NLP + Rule Engine</h4>
+                    <p class="text-muted text-small mt-05">Keywords · Sector Risk</p>
+                </div>
+            </div>
+
+            <i class="fas fa-arrow-down text-muted arch-arrow"></i>
+
+            <!-- Output -->
+            <div class="glass-card text-center arch-box primary-glow-bg border-primary w-100">
+                <h3 class="mb-05">AI Credit Reasoning</h3>
+                <p class="bold">CAM Report Generator</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Data Processing Pipeline -->
+    <section class="section bg-secondary" id="pipeline">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Data Processing <span class="text-gradient">Pipeline</span></h2>
+                <p class="text-secondary subtitle">
+                    How raw unstructured documents become actionable credit decisions.
+                </p>
+            </div>
+
+            <div class="spine-pipeline">
+                <!-- Left Tree: Data Ingestion & Structuring -->
+                <div class="spine-tree tree-left">
+                    <div class="spine-nodes">
+                        <div class="spine-line"></div>
+
+                        <div class="spine-node-wrapper">
+                            <div class="spine-node node-c1">
+                                <div class="spine-icon"><i class="fas fa-file-upload"></i></div>
+                                <div class="spine-text">
+                                    <span class="spine-title">Document Ingestion</span>
+                                    <span class="spine-desc">Upload PDFs, Images, and CSVs</span>
+                                </div>
+                            </div>
+                            <div class="node-connector"></div>
+                        </div>
+
+                        <div class="spine-node-wrapper">
+                            <div class="spine-node node-c2">
+                                <div class="spine-icon"><i class="fas fa-font"></i></div>
+                                <div class="spine-text">
+                                    <span class="spine-title">OCR Text Engine</span>
+                                    <span class="spine-desc">PyMuPDF & Tesseract Parsing</span>
+                                </div>
+                            </div>
+                            <div class="node-connector"></div>
+                        </div>
+
+                        <div class="spine-node-wrapper">
+                            <div class="spine-node node-c3">
+                                <div class="spine-icon"><i class="fas fa-table"></i></div>
+                                <div class="spine-text">
+                                    <span class="spine-title">Table Extraction</span>
+                                    <span class="spine-desc">Camelot Lattice/Stream targeting</span>
+                                </div>
+                            </div>
+                            <div class="node-connector"></div>
+                        </div>
+
+                        <div class="spine-node-wrapper">
+                            <div class="spine-node node-c4">
+                                <div class="spine-icon"><i class="fas fa-vector-square"></i></div>
+                                <div class="spine-text">
+                                    <span class="spine-title">Vector Embedding</span>
+                                    <span class="spine-desc">High-dimensional ChromaDB Store</span>
+                                </div>
+                            </div>
+                            <div class="node-connector"></div>
+                        </div>
+
+                        <div class="spine-node-wrapper">
+                            <div class="spine-node node-c5">
+                                <div class="spine-icon"><i class="fas fa-code"></i></div>
+                                <div class="spine-text">
+                                    <span class="spine-title">Financial Structuring</span>
+                                    <span class="spine-desc">LLM JSON mapping of raw data</span>
+                                </div>
+                            </div>
+                            <div class="node-connector"></div>
+                        </div>
+                    </div>
+                    <div class="hub-connector"></div>
+                </div>
+
+                <!-- Center Node -->
+                <div class="spine-center">
+                    <div class="spine-center-circle">
+                        <i class="fas fa-brain mb-1"></i>
+                        <h3 class="text-white">AI Credit<br>Reasoning<br>Convergence</h3>
+                        <p class="text-secondary text-small mt-05" style="line-height: 1.3">Synthesizing 500+<br>data
+                            points</p>
+                    </div>
+                </div>
+
+                <!-- Right Tree: Intelligence & Output -->
+                <div class="spine-tree tree-right">
+                    <div class="hub-connector"></div>
+                    <div class="spine-nodes">
+                        <div class="spine-line"></div>
+
+                        <div class="spine-node-wrapper">
+                            <div class="node-connector"></div>
+                            <div class="spine-node node-c6">
+                                <div class="spine-icon"><i class="fas fa-percentage"></i></div>
+                                <div class="spine-text">
+                                    <span class="spine-title">Financial Ratio Engine</span>
+                                    <span class="spine-desc">D/E · DSCR · TOL/TNW · ROE · ROCE</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="spine-node-wrapper">
+                            <div class="node-connector"></div>
+                            <div class="spine-node node-c7">
+                                <div class="spine-icon"><i class="fas fa-chart-line"></i></div>
+                                <div class="spine-text">
+                                    <span class="spine-title">Risk Model Prediction</span>
+                                    <span class="spine-desc">XGBoost Scoring + SHAP explains</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="spine-node-wrapper">
+                            <div class="node-connector"></div>
+                            <div class="spine-node node-c8">
+                                <div class="spine-icon"><i class="fas fa-comment-dots"></i></div>
+                                <div class="spine-text">
+                                    <span class="spine-title">NLP Sentiment Analysis</span>
+                                    <span class="spine-desc">FinBERT reads director reports</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="spine-node-wrapper">
+                            <div class="node-connector"></div>
+                            <div class="spine-node node-c9">
+                                <div class="spine-icon"><i class="fas fa-spider"></i></div>
+                                <div class="spine-text">
+                                    <span class="spine-title">Graph & Agent Intel</span>
+                                    <span class="spine-desc">Neo4j links + Web News Scrapes</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="spine-node-wrapper">
+                            <div class="node-connector"></div>
+                            <div class="spine-node node-c10">
+                                <div class="spine-icon"><i class="fas fa-file-contract"></i></div>
+                                <div class="spine-text">
+                                    <span class="spine-title">CAM Report Generation</span>
+                                    <span class="spine-desc">LLM drafts comprehensive memo</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Hackathon Requirements (3 Pillars) -->
+    <section class="section container" id="pillars">
+        <div class="section-header text-center">
+            <h2>Hackathon Challenge: <span class="text-gradient-primary">The 3 Pillars</span></h2>
+            <p class="text-secondary subtitle">
+                IntelliCredit AI comprehensively addresses all core requirements.
+            </p>
+        </div>
+
+        <div class="grid grid-3">
+            <!-- Pillar 1 -->
+            <div class="glass-card pillar-card">
+                <div class="pillar-header">
+                    <div class="icon-box bg-primary-faint"><i class="fas fa-database text-primary icon-large"></i></div>
+                    <h3>1. Data Ingestor</h3>
+                </div>
+                <p class="text-secondary">Handles multiple formats including PDF Annual Reports, GST Returns, Bank
+                    Statements, Legal Notices, and Loan Sanctions.</p>
+                <div class="mt-1">
+                    <h4 class="text-white mb-05">Tools Used:</h4>
+                    <div class="badge-group">
+                        <span class="badge">PyMuPDF (PDFs)</span>
+                        <span class="badge">Tesseract (OCR)</span>
+                        <span class="badge">Camelot (Tables)</span>
+                        <span class="badge">Pandas (Excel)</span>
+                    </div>
+                </div>
+                <div class="example-box mt-1">
+                    <h5 class="text-danger mb-05">Example Detection:</h5>
+                    <p class="text-muted text-small">Revenue inflation (GST revenue vs bank deposits), Circular trading.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Pillar 2 -->
+            <div class="glass-card pillar-card">
+                <div class="pillar-header">
+                    <div class="icon-box bg-purple-faint"><i class="fas fa-search icon-purple icon-large"></i></div>
+                    <h3>2. Research Agent</h3>
+                </div>
+                <p class="text-secondary">AI automatically gathers external intelligence to triangulate risk profiles.
+                </p>
+                <ul class="pillar-list mt-1 text-secondary">
+                    <li><strong class="text-white">News Agent:</strong> Fraud news, investigations, media signals</li>
+                    <li><strong class="text-white">Litigation Agent:</strong> Lawsuits, NCLT, DRT tribunals</li>
+                    <li><strong class="text-white">Industry Agent:</strong> Sector growth trends &amp; risks</li>
+                    <li><strong class="text-white">Graph Agent:</strong> Neo4j director &amp; entity link analysis</li>
+                </ul>
+            </div>
+
+            <!-- Pillar 3 -->
+            <div class="glass-card pillar-card">
+                <div class="pillar-header">
+                    <div class="icon-box bg-accent-faint"><i class="fas fa-check-circle text-accent icon-large"></i>
+                    </div>
+                    <h3>3. Recommendation Engine</h3>
+                </div>
+                <p class="text-secondary">Final AI decision system combining financial ratios, ML scores, NLP, external
+                    research, and graph analysis.</p>
+                <div class="example-box border-accent mt-1">
+                    <h5 class="text-accent mb-05">Output Example &rarr;</h5>
+                    <div class="flex-between mb-05">
+                        <span class="text-secondary">Risk Score:</span>
+                        <strong class="text-white">38.5 / 100</strong>
+                    </div>
+                    <div class="flex-between mb-05">
+                        <span class="text-secondary">Risk Grade:</span>
+                        <strong class="text-white">Medium</strong>
+                    </div>
+                    <div class="flex-between mb-05">
+                        <span class="text-secondary">Default Probability:</span>
+                        <strong class="text-white">28.4%</strong>
+                    </div>
+                    <div class="flex-between mb-05">
+                        <span class="text-secondary">Interest Rate:</span>
+                        <strong class="text-white">11.5%</strong>
+                    </div>
+                    <div class="divider mt-05 pt-05">
+                        <strong class="text-accent">✅ Approve — ₹10 Cr · 60 months</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. API Endpoints -->
+    <section class="section bg-secondary" id="api">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2><span class="text-gradient">API Endpoints</span></h2>
+                <p class="text-secondary subtitle">
+                    Ready to integrate with existing banking core systems.
+                </p>
+            </            <div class="grid grid-2 max-w-1000 mx-auto">
+                <!-- Endpoint 1 -->
+                <div class="glass-card api-card">
+                    <div class="api-header">
+                        <span class="api-method post">POST</span>
+                        <span class="api-path">/api/documents/upload</span>
+                    </div>
+                    <div class="api-body">
+                        <div>
+                            <span class="api-label">Request</span>
+                            <p class="api-code-inline">multipart/form-data</p>
+                        </div>
+                        <div>
+                            <span class="api-label">Response</span>
+                            <pre class="api-code-block"><code>{
+ "document_id": "uuid",
+ "company_id": "uuid",
+ "processing_status": "completed",
+ "financial_data_extracted": true
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Endpoint 2 -->
+                <div class="glass-card api-card">
+                    <div class="api-header">
+                        <span class="api-method post">POST</span>
+                        <span class="api-path">/api/risk/analyze</span>
+                    </div>
+                    <div class="api-body">
+                        <div>
+                            <span class="api-label">Response</span>
+                            <pre class="api-code-block"><code>{
+ "overall_risk_score": 38.5,
+ "risk_grade": "Medium",
+ "default_probability": 0.284,
+ "risk_factors": [...],
+ "component_scores": {...}
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Endpoint 3 -->
+                <div class="glass-card api-card">
+                    <div class="api-header">
+                        <span class="api-method post">POST</span>
+                        <span class="api-path">/api/cam/generate</span>
+                    </div>
+                    <div class="api-body">
+                        <div>
+                            <span class="api-label">Response</span>
+                            <pre class="api-code-block"><code>{
+ "decision": "APPROVE",
+ "risk_score": 38.5,
+ "recommended_loan_amount": 10000000,
+ "interest_rate": 11.5,
+ "loan_tenor_months": 60,
+ "executive_summary": "..."
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Endpoint 4 -->
+                <div class="glass-card api-card">
+                    <div class="api-header">
+                        <span class="api-method get">GET</span>
+                        <span class="api-path">/api/cam/full/{company_id}</span>
+                    </div>
+                    <div class="api-body">
+                        <div>
+                            <span class="api-label">Response</span>
+                            <pre class="api-code-block"><code>Returns bundled:
+ financials, risk_scores,
+ research_reports, cam_reports</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Tech Stack Section -->
+    <section class="section container" id="tech-stack">
+        <div class="section-header text-center">
+            <h2>Tech <span class="text-gradient-primary">Stack</span></h2>
+            <p class="text-secondary subtitle">
+                Built with cutting-edge tools for scale and performance.
+            </p>
+        </div>
+
+        <div class="tech-grid">
+            <div class="glass-card tech-card">
+                <div class="icon-rounded"><i class="fas fa-desktop text-primary"></i></div>
+                <h3>Frontend</h3>
+                <div class="badge-group center">
+                    <span class="badge border-muted">Next.js 14</span>
+                    <span class="badge border-muted">TypeScript</span>
+                    <span class="badge border-muted">Tailwind CSS</span>
+                </div>
+            </div>
+
+            <div class="glass-card tech-card">
+                <div class="icon-rounded"><i class="fas fa-server icon-orange"></i></div>
+                <h3>Backend</h3>
+                <div class="badge-group center">
+                    <span class="badge border-muted">FastAPI</span>
+                    <span class="badge border-muted">Python 3.11</span>
+                    <span class="badge border-muted">Celery + Redis</span>
+                </div>
+            </div>
+
+            <div class="glass-card tech-card">
+                <div class="icon-rounded"><i class="fas fa-microchip icon-purple"></i></div>
+                <h3>AI / ML</h3>
+                <div class="badge-group center">
+                    <span class="badge border-muted">XGBoost + SHAP</span>
+                    <span class="badge border-muted">FinBERT</span>
+                    <span class="badge border-muted">Gemini LLM</span>
+                    <span class="badge border-muted">LangChain</span>
+                </div>
+            </div>
+
+            <div class="glass-card tech-card">
+                <div class="icon-rounded"><i class="fas fa-database icon-cyan"></i></div>
+                <h3>Databases</h3>
+                <div class="badge-group center">
+                    <span class="badge border-muted">Supabase (PostgreSQL)</span>
+                    <span class="badge border-muted">ChromaDB (Vectors)</span>
+                    <span class="badge border-muted">Neo4j (Graph)</span>
+                </div>
+            </div>
+
+            <div class="glass-card tech-card">
+                <div class="icon-rounded"><i class="fas fa-file-pdf icon-orange"></i></div>
+                <h3>Document Processing</h3>
+                <div class="badge-group center">
+                    <span class="badge border-muted">PyMuPDF</span>
+                    <span class="badge border-muted">Camelot (Tables)</span>
+                    <span class="badge border-muted">Tesseract OCR</span>
+                </div>
+            </div>
+
+            <div class="glass-card tech-card">
+                <div class="icon-rounded"><i class="fas fa-cube text-accent"></i></div>
+                <h3>Infrastructure</h3>
+                <div class="badge-group center">
+                    <span class="badge border-muted">Docker Compose</span>
+                    <span class="badge border-muted">uvicorn</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Demo & 10. MVP Scope -->
+    <section class="section bg-secondary" id="demo">
+        <div class="demo-glow"></div>
+        <div class="container relative-z">
+            <div class="section-header text-center">
+                <h2>Experience the <span class="text-gradient">Demo</span></h2>
+                <p class="text-secondary subtitle">
+                    Watch IntelliCredit AI process 100+ pages of financial data into a comprehensive report in seconds.
+                </p>
+            </div>
+
+            <div class="demo-grid pt-1">
+                <div class="demo-flow">
+                    <h3 class="mb-1">Demo Flow</h3>
+                    <div class="demo-step-box">
+                        <span class="step-num">1</span>
+                        <span class="text-white">Upload financial PDF</span>
+                    </div>
+                    <div class="demo-step-box">
+                        <span class="step-num">2</span>
+                        <span class="text-white">System extracts tables</span>
+                    </div>
+                    <div class="demo-step-box">
+                        <span class="step-num">3</span>
+                        <span class="text-white">AI calculates ratios</span>
+                    </div>
+                    <div class="demo-step-box">
+                        <span class="step-num">4</span>
+                        <span class="text-white">Risk score generated</span>
+                    </div>
+                    <div class="demo-step-box">
+                        <span class="step-num">5</span>
+                        <span class="text-white">CAM report produced</span>
+                    </div>
+                </div>
+
+                <div class="demo-video-placeholder glass-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;">
+                    <i class="fas fa-hourglass-half icon-xl text-accent" style="opacity:0.7;"></i>
+                    <span class="badge" style="font-size:1rem;padding:0.6rem 1.4rem;background:rgba(251,191,36,0.12);border:1px solid var(--accent);color:var(--accent);border-radius:2rem;">🚧 Demo Coming Soon</span>
+                    <p class="text-secondary" style="font-size:0.9rem;">Live walkthrough will be available at the hackathon presentation.</p>
+                </div>
+            </div>
+
+            <!-- MVP Scope Box -->
+            <div class="glass-card mvp-box mx-auto">
+                <h3 class="text-accent text-center mb-1">🛠️ MVP Scope</h3>
+                <div class="mvp-features">
+                    <div class="mvp-item"><i class="fas fa-check-circle text-accent"></i> Document Upload (PDF, XLSX, DOCX)</div>
+                    <div class="mvp-item"><i class="fas fa-check-circle text-accent"></i> Financial Data Extraction</div>
+                    <div class="mvp-item"><i class="fas fa-check-circle text-accent"></i> 10+ Ratio Calculation (incl. DSCR, TOL/TNW)</div>
+                    <div class="mvp-item"><i class="fas fa-check-circle text-accent"></i> 4-Layer Risk Engine (Rules + XGBoost + NLP + Sector)</div>
+                    <div class="mvp-item"><i class="fas fa-check-circle text-accent"></i> Vector Embedding (ChromaDB)</div>
+                    <div class="mvp-item"><i class="fas fa-check-circle text-accent"></i> Research Agents (News + Litigation + Industry + Graph)</div>
+                    <div class="mvp-item"><i class="fas fa-check-circle text-accent"></i> Decision Engine (Approve / Conditional / Reject)</div>
+                    <div class="mvp-item"><i class="fas fa-check-circle text-accent"></i> Full CAM Report Generation</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 IntelliCredit AI. Built for the Hackathon.</p>
+    </footer>
+
+</body>
+
+</html>
