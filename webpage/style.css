@@ -1215,3 +1215,45 @@ h6 {
     color: var(--text-muted);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
+
+/* Contributors Section */
+.contributor-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contributor-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.contributor-avatar img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 2px solid var(--primary);
+}
+
+.contributor-details h3 {
+    margin: 0.5rem 0;
+    color: var(--text-primary);
+}
+
+.contributor-social a {
+    margin: 0 0.5rem;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    transition: color 0.2s;
+}
+
+.contributor-social a:hover {
+    color: var(--primary);
+}
