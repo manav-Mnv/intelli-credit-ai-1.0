@@ -17,9 +17,12 @@ env/
 # FastAPI / uploads
 backend/uploads/
 backend/chromadb_data/
+uploads/
+neo4j_data/
 
 # ML models (large files)
 ml/models/*.pkl
+
 ml/models/*.json
 
 # Environment
