@@ -12,6 +12,44 @@
         rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+    <style>
+        .nav-tooltip { position: relative; display: inline-block; }
+        .nav-tooltip::after {
+            content: attr(data-tip);
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 15, 30, 0.95);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.4);
+            padding: 0.5rem 0.8rem;
+            border-radius: 0.5rem;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.2s ease;
+            z-index: 10000;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+        /* Tooltip Arrow */
+        .nav-tooltip::before {
+            content: "";
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 0 6px 6px 6px;
+            border-style: solid;
+            border-color: transparent transparent rgba(251, 191, 36, 0.4) transparent;
+            opacity: 0;
+            transition: all 0.2s ease;
+            pointer-events: none;
+            z-index: 10000;
+        }
+        .nav-tooltip:hover::after, .nav-tooltip:hover::before { opacity: 1; }
+    </style>
 </head>
 
 <body>
@@ -29,7 +67,8 @@
             <a href="#solution">Solution</a>
             <a href="architecture.html">Structure & Architecture</a>
             <a href="#demo" class="btn btn-outline-primary btn-sm">Try Demo</a>
-            <a href="http://localhost:8000/docs" target="_blank" class="btn btn-outline-primary btn-sm">API Docs</a>
+            <span class="nav-tooltip" data-tip="Not yet public 🔒"><a href="http://localhost:8000/docs" target="_blank" class="btn btn-outline-primary btn-sm" style="pointer-events:none;opacity:0.55;">API Docs</a></span>
+            <a href="https://github.com/manav-Mnv/intelli-credit-ai-1.0.git" target="_blank" class="btn btn-outline-primary btn-sm"><i class="fab fa-github"></i> GitHub</a>
         </nav>
     </header>
 
@@ -691,7 +730,7 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <p>© 2026 IntelliCredit AI. Built for the Hackathon.</p>
+        <p>© 2026 IntelliCredit AI. Built for the Hackathon. | <a href="https://github.com/manav-Mnv/intelli-credit-ai-1.0.git" target="_blank" class="text-primary"><i class="fab fa-github"></i> Source Code</a></p>
     </footer>
 
 </body>
