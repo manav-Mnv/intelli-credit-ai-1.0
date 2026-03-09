@@ -51,3 +51,8 @@ Thumbs.db
 
 # Webpage (static site - not needed in repo)
 webpage/
+
+#env.example
+.env.example
+backend/.env.example
+/.env.example
