@@ -48,3 +48,6 @@ celerybeat-schedule
 # OS
 .DS_Store
 Thumbs.db
+
+# Webpage (static site - not needed in repo)
+webpage/
