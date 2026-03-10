@@ -49,6 +49,68 @@ docker-compose up --build -d
 
 ---
 
+## 💻 Detailed Quick Start (Local Windows)
+
+Follow this step-by-step guide to run the complete IntelliCredit AI system locally on your Windows machine without WSL. 
+
+**Prerequisites:** Ensure you have installed [Python 3.11+](https://www.python.org/downloads/), [Node.js](https://nodejs.org/), and [Docker Desktop for Windows](https://www.docker.com/products/docker-desktop/).
+
+### Step 1: Open Docker Desktop
+- Search for **Docker Desktop** in your Windows Start Menu and open it.
+- **Wait** until the Docker icon in your system tray turns green, or it says "Engine running" in the Docker Desktop UI. This is strictly required before proceeding so Redis and Neo4j can launch!
+
+### Step 2: Open a PowerShell Terminal & Clone the Code
+- Open your Windows Start Menu, type `powershell`, and run Windows PowerShell.
+- Run the following commands to download the project and enter its folder:
+```powershell
+git clone https://github.com/manav-Mnv/intelli-credit-ai-1.0.git
+cd intelli-credit-ai-1.0
+```
+
+### Step 3: Run the Installer Script
+- While still in the PowerShell terminal, run the setup script:
+```powershell
+.\install.ps1
+```
+- *What this does:* It automatically installs all Python packages for the backend, installs all NPM packages for the frontend, trains your local machine learning model, and creates a template `backend\.env` file for you.
+
+### Step 4: Add Your Credentials
+- Open the `backend\.env` file in Notepad or your code editor.
+- Fill in your actual API keys (e.g., Supabase, Gemini). **Save and close the file**.
+
+### Step 5: Start the Databases (Redis & Neo4j)
+- In the same PowerShell window (ensure you are still exactly inside the main project folder), run the start script:
+```powershell
+.\start.ps1
+```
+- Keep this terminal open. It ensures your Docker containers for Redis and Neo4j are spun up. 
+
+### Step 6: Run the Backend (FastAPI)
+- Open a **BRAND NEW** Windows PowerShell terminal window.
+- Make sure you are inside the main project folder, then navigate to the backend folder and start the API server:
+```powershell
+cd backend
+uvicorn app.main:app --reload --port 8000
+```
+- *Minimize this terminal and leave it running in the background.*
+
+### Step 7: Run the Frontend (Next.js)
+- Open a **THIRD** Windows PowerShell terminal window.
+- Make sure you are inside the main project folder, then navigate to the frontend folder and start the web app:
+```powershell
+cd frontend
+npm run dev
+```
+- *Minimize this terminal and leave it running in the background.*
+
+### Step 8: View the Application
+Everything is now running! Open your web browser (Chrome, Edge, etc.) and visit:
+- 🌐 **Main Dashboard:**   [http://localhost:3000](http://localhost:3000)
+- 📚 **Backend API Docs:** [http://localhost:8000/docs](http://localhost:8000/docs)
+- 🗄️  **Neo4j Database:**   [http://localhost:7474](http://localhost:7474)
+
+---
+
 ## 🏗️ System Architecture
 
 1.  **Ingestion Engine**: Extracts structured tables and text from heterogeneous financial documents.
