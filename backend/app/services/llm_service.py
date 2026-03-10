@@ -6,14 +6,14 @@ Falls back to empty strings/templates if API key is not provided.
 """
 import logging
 import os
-import google.generativeai as genai
+import google.generativeai as genai  # type: ignore
 
 logger = logging.getLogger(__name__)
 
 class LLMService:
     """Cloud LLM via Google Gemini for enhanced CAM generation."""
 
-    def __init__(self, model: str = "gemini-1.5-flash"):
+    def __init__(self, model: str = "gemini-2.5-flash"):
         self.model_name = model
         self._available = False
         
@@ -58,7 +58,8 @@ class LLMService:
         key_risks: list[str],
     ) -> str:
         """Generate an enhanced executive summary using LLM."""
-        risks_text = "; ".join(key_risks[:3]) if key_risks else "No major risks identified"
+        short_risks = key_risks[:3]  # type: ignore
+        risks_text = "; ".join(short_risks) if short_risks else "No major risks identified"
         prompt = f"""You are a senior credit analyst at a bank. Write a concise, professional 3-sentence executive summary for a Credit Appraisal Memo.
 
 Company: {company_name}
@@ -83,7 +84,8 @@ Write only the summary, no headers, no bullet points. Be factual and precise:"""
     ) -> str:
         """Generate enhanced risk narrative."""
         all_risks = risk_factors + financial_flags
-        risks_text = "\n".join(f"- {r}" for r in all_risks[:6]) if all_risks else "- No critical risks"
+        short_risks = all_risks[:6]  # type: ignore
+        risks_text = "\n".join(f"- {r}" for r in short_risks) if short_risks else "- No critical risks"
         prompt = f"""As a credit analyst, write a brief risk assessment paragraph for {company_name}.
 
 Identified risks:
@@ -98,9 +100,10 @@ Write 2-3 sentences summarizing the risk profile. Be concise:"""
 
     def enhance_industry_outlook(self, industry: str, industry_summary: str) -> str:
         """Generate enhanced industry analysis."""
+        summary_text = industry_summary[:300] if industry_summary else 'No specific data'  # type: ignore
         prompt = f"""As a credit analyst, write a 2-sentence industry outlook for the {industry} sector in India for 2024-2025.
 
-Research finding: {industry_summary[:300] if industry_summary else 'No specific data'}
+Research finding: {summary_text}
 
 Be concise and analytical:"""
 

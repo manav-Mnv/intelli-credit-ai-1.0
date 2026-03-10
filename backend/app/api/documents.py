@@ -102,7 +102,11 @@ async def upload_document(
         if financial_data:
             from app.services.financial_analyzer import analyzer
             analysis = analyzer.analyze(financial_data)
-            ratios_db = {k: v for k, v in analysis.items() if k not in ["dscr", "tol_tnw", "ebitda_margin", "gross_margin", "debt_to_assets"]}
+            
+            # We must iterate over the nested 'ratios' dict, not the outer analysis response
+            ratios_dict = analysis.get("ratios", {})
+            ratios_db = {k: v for k, v in ratios_dict.items() if k not in ["dscr", "tol_tnw", "ebitda_margin", "gross_margin", "debt_to_assets"]}
+            
             fin_record = {
                 "id": str(uuid.uuid4()),
                 "company_id": company_id,
