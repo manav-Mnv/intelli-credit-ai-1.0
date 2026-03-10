@@ -94,7 +94,8 @@ export default function UploadPage() {
 
         } catch (err: any) {
             setStep("error");
-            const msg = err?.response?.data?.detail || err?.message || "Upload failed";
+            const rawMsg = err?.response?.data?.detail;
+            const msg = typeof rawMsg === 'string' ? rawMsg : (Array.isArray(rawMsg) ? rawMsg[0]?.msg : err?.message || "Upload failed");
             setError(msg);
             toast.error(msg);
         }
@@ -168,10 +169,10 @@ export default function UploadPage() {
                     <div
                         {...getRootProps()}
                         className={`border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all ${isDragActive
-                                ? "border-brand-500 bg-brand-500/10"
-                                : file
-                                    ? "border-emerald-500/50 bg-emerald-500/5"
-                                    : "border-white/10 hover:border-white/20 hover:bg-white/3"
+                            ? "border-brand-500 bg-brand-500/10"
+                            : file
+                                ? "border-emerald-500/50 bg-emerald-500/5"
+                                : "border-white/10 hover:border-white/20 hover:bg-white/3"
                             } ${isProcessing ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                         <input {...getInputProps()} disabled={isProcessing} />

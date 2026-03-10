@@ -18,9 +18,7 @@ export async function uploadDocument(
     formData.append("company_name", companyName);
     formData.append("industry", industry);
 
-    const res = await api.post("/api/documents/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-    });
+    const res = await api.post("/api/documents/upload", formData);
     return res.data;
 }
 

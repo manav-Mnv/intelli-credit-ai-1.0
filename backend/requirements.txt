@@ -46,3 +46,6 @@ neo4j
 aiofiles
 Pillow
 reportlab
+
+# LLM integration
+google-generativeai

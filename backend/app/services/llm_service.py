@@ -1,55 +1,51 @@
 """
-Ollama LLM Service
-Uses locally-running Ollama (llama3/mistral) to enhance CAM sections
+Google Gemini LLM Service
+Uses Google's generative AI (Gemini) to enhance CAM sections
 with richer, more natural language summaries.
-Falls back to template-based text if Ollama is not running.
+Falls back to empty strings/templates if API key is not provided.
 """
 import logging
-import httpx
+import os
+import google.generativeai as genai
 
 logger = logging.getLogger(__name__)
 
-
 class LLMService:
-    """Local LLM via Ollama for enhanced CAM generation."""
+    """Cloud LLM via Google Gemini for enhanced CAM generation."""
 
-    def __init__(self, base_url: str = "http://localhost:11434", model: str = "llama3"):
-        self.base_url = base_url
-        self.model = model
-        self._available = None  # None = not checked yet
-
-    def _check_available(self) -> bool:
-        if self._available is None:
+    def __init__(self, model: str = "gemini-1.5-flash"):
+        self.model_name = model
+        self._available = False
+        
+        # Initialize Gemini API
+        api_key = os.getenv("GEMINI_API_KEY")
+        if api_key:
             try:
-                resp = httpx.get(f"{self.base_url}/api/tags", timeout=2.0)
-                self._available = resp.status_code == 200
-                if self._available:
-                    logger.info(f"Ollama available at {self.base_url} with model {self.model}")
-            except Exception:
-                self._available = False
-                logger.warning("Ollama not available — LLM enhancement disabled")
-        return self._available
+                genai.configure(api_key=api_key)
+                self.model = genai.GenerativeModel(self.model_name)
+                self._available = True
+                logger.info(f"Google Gemini configured with model {self.model_name}")
+            except Exception as e:
+                logger.warning(f"Failed to configure Gemini: {e}")
+        else:
+            logger.warning("GEMINI_API_KEY not found in environment variables — LLM enhancement disabled")
 
     def generate(self, prompt: str, max_tokens: int = 500) -> str:
         """Generate text from a prompt."""
-        if not self._check_available():
+        if not self._available:
             return ""
         try:
-            resp = httpx.post(
-                f"{self.base_url}/api/generate",
-                json={
-                    "model": self.model,
-                    "prompt": prompt,
-                    "stream": False,
-                    "options": {"num_predict": max_tokens, "temperature": 0.3},
-                },
-                timeout=60.0,
+            response = self.model.generate_content(
+                prompt,
+                generation_config=genai.types.GenerationConfig(
+                    max_output_tokens=max_tokens,
+                    temperature=0.3,
+                )
             )
-            if resp.status_code == 200:
-                return resp.json().get("response", "").strip()
+            return response.text.strip()
         except Exception as e:
-            logger.warning(f"Ollama generation failed: {e}")
-        return ""
+            logger.warning(f"Gemini generation failed: {e}")
+            return ""
 
     def enhance_executive_summary(
         self,

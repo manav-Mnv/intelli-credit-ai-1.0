@@ -23,7 +23,10 @@ export default function AnalysisPage() {
     useEffect(() => {
         getFullAnalysis(id)
             .then(setData)
-            .catch((e) => setError(e?.response?.data?.detail || "Failed to load analysis"))
+            .catch((e) => {
+                const detail = e?.response?.data?.detail;
+                setError(typeof detail === 'string' ? detail : (Array.isArray(detail) ? detail[0]?.msg : "Failed to load analysis"));
+            })
             .finally(() => setLoading(false));
     }, [id]);
 

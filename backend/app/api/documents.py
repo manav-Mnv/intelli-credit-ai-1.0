@@ -19,9 +19,9 @@ MAX_SIZE = settings.MAX_FILE_SIZE_MB * 1024 * 1024  # bytes
 @router.post("/upload")
 async def upload_document(
     file: UploadFile = File(...),
-    company_id: Optional[str] = Form(None),
-    company_name: Optional[str] = Form(None),
-    industry: Optional[str] = Form(None),
+    company_id: str = Form(None),
+    company_name: str = Form(None),
+    industry: str = Form(None),
 ):
     """
     Upload a financial document for a company.
@@ -102,7 +102,7 @@ async def upload_document(
         if financial_data:
             from app.services.financial_analyzer import analyzer
             analysis = analyzer.analyze(financial_data)
-            ratios_db = {k: v for k, v in ratios.items() if k not in ["dscr", "tol_tnw", "ebitda_margin", "gross_margin", "debt_to_assets"]}
+            ratios_db = {k: v for k, v in analysis.items() if k not in ["dscr", "tol_tnw", "ebitda_margin", "gross_margin", "debt_to_assets"]}
             fin_record = {
                 "id": str(uuid.uuid4()),
                 "company_id": company_id,

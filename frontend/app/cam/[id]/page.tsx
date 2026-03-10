@@ -24,7 +24,10 @@ export default function CAMPage() {
                 setCam(camRes.data);
                 setCompany(compRes.data);
             })
-            .catch((e) => setError(e?.response?.data?.detail || "Failed to load CAM report"))
+            .catch((e) => {
+                const detail = e?.response?.data?.detail;
+                setError(typeof detail === 'string' ? detail : (Array.isArray(detail) ? detail[0]?.msg : "Failed to load CAM report"));
+            })
             .finally(() => setLoading(false));
     }, [id]);
 
