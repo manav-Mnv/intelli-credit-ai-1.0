@@ -79,11 +79,11 @@ DEMO_COMPANIES = [
 async def create_demo_company(demo: dict):
     """Create one demo company with all analysis."""
     try:
-        from app.database import insert_record
-        from app.services.financial_analyzer import analyzer
-        from app.services.risk_engine import risk_engine
-        from app.services.decision_engine import decision_engine
-        from app.services.cam_generator import cam_generator
+        from app.database import insert_record  # type: ignore
+        from app.services.financial_analyzer import analyzer  # type: ignore
+        from app.services.risk_engine import risk_engine  # type: ignore
+        from app.services.decision_engine import decision_engine  # type: ignore
+        from app.services.cam_generator import cam_generator  # type: ignore
         import uuid
 
         company_id = str(uuid.uuid4())
@@ -108,6 +108,8 @@ async def create_demo_company(demo: dict):
         ratios.pop("debt_to_assets", None)
         ratios.pop("gross_margin", None)
         ratios.pop("ebitda_margin", None)
+        ratios.pop("dscr", None)
+        ratios.pop("tol_tnw", None)
 
         fin_record = {
             "id": str(uuid.uuid4()),
@@ -199,7 +201,7 @@ async def main():
     for demo in DEMO_COMPANIES:
         cid = await create_demo_company(demo)
         if cid:
-            ids.append((demo["company"]["company_name"], cid))
+            ids.append((demo["company"]["company_name"], cid))  # type: ignore
 
     print("\n==========================================")
     print("✅ Demo data created!\n")
